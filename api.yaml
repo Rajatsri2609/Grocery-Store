@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: My Flask RESTful API
+  version: 1.0.0
+  description: An API for managing categories and products.
+paths:
+  /api/all_category:
+    get:
+      summary: Get all categories
+      responses:
+        '200':
+          description: A list of all categories
+        '404':
+          description: Categories not found
+    post:
+      summary: Create or undelete a category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                c_name:
+                  type: string
+      responses:
+        '201':
+          description: Category created or undeleted
+        '400':
+          description: Invalid request data
+  /api/all_category/{id}:
+    put:
+      summary: Update a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                c_name:
+                  type: string
+      responses:
+        '201':
+          description: Category updated
+        '404':
+          description: Category not found
+    delete:
+      summary: Delete a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '202':
+          description: Category deleted
+  /api/products:
+    get:
+      summary: Get all products
+      responses:
+        '200':
+          description: A list of all products
+    post:
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_name:
+                  type: string
+                price:
+                  type: number
+                quantity:
+                  type: integer
+                manufacturing_date:
+                  type: string
+                category_id:
+                  type: integer
+      responses:
+        '201':
+          description: Product created
+        '400':
+          description: Invalid request data
+  /api/products/{id}:
+    put:
+      summary: Update a product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_name:
+                  type: string
+                price:
+                  type: number
+                quantity:
+                  type: integer
+                manufacturing_date:
+                  type: string
+                category_id:
+                  type: integer
+      responses:
+        '200':
+          description: Product updated
+        '404':
+          description: Product not found
+    delete:
+      summary: Delete a product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Product deleted
