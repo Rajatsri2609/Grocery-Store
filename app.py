@@ -596,6 +596,5 @@ def orders():
     payments=Payment.query.filter_by(user_id=session['user_id']).all()
     return render_template('my_orders.html',user=user,payments=payments)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
 
